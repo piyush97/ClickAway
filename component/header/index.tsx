@@ -1,75 +1,130 @@
-import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  useColorMode,
+} from '@chakra-ui/react';
+import Image from 'next/image';
 import React from 'react';
 import menu from '../../utils/menu';
 import ThemeSwitch from '../ThemeSwitch';
-const MenuItems = ({ children }) => (
-  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
-    {children}
-  </Text>
-);
 
-const Header = (props) => {
-  const [show, setShow] = React.useState(false);
-  const handleToggle = () => setShow(!show);
+const NavBar = (props) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <>
-      <Flex
-        as="nav"
-        align="center"
-        justify="space-between"
-        wrap="wrap"
-        py={'1rem'}
-        {...props}
-      >
-        <Flex align="center" mr={5}>
-          <Image src="./logo.png" alt="logo" width="4rem" height="4rem" />
-          <Heading as="h1" size="lg" letterSpacing={'-.1rem'} pl="2">
-            Click Away
-          </Heading>
-        </Flex>
-
-        <Box display={{ base: 'block', md: 'none' }} onClick={handleToggle}>
-          <svg
-            width="12px"
-            color="theme"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <title>Menu</title>
-            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-          </svg>
-        </Box>
-
-        <Box
-          display={{ sm: show ? 'block' : 'none', md: 'flex' }}
-          width={{ sm: 'full', md: 'auto' }}
-          alignItems="center"
-          flexGrow={1}
-        >
-          {menu.map((edge) => (
-            <MenuItems key={edge.key}>{edge.name}</MenuItems>
-          ))}
-        </Box>
-        <Box
-          display={{ sm: show ? 'block' : 'none', md: 'block' }}
-          mt={{ base: 4, md: 0 }}
-          mr="2rem"
-        >
-          {' '}
-          <ThemeSwitch />
-        </Box>
-        <Box
-          display={{ sm: show ? 'block' : 'none', md: 'block' }}
-          mt={{ base: 4, md: 0 }}
-        >
-          <Button bg="transparent" border="1px">
-            Subscribe
-          </Button>
-        </Box>
+    <NavBarContainer {...props}>
+      <Flex>
+        <Image src="/logo.png" alt="logo" width="40px" height="40px" />
+        <Heading as="h1" size="lg" letterSpacing={'-.1rem'} pl="2">
+          Click Away
+        </Heading>
       </Flex>
-    </>
+      <MenuToggle toggle={toggle} isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} />
+    </NavBarContainer>
   );
 };
 
-export default Header;
+const CloseIcon = ({ colorMode }) => {
+  return (
+    <svg
+      fill={colorMode === 'light' ? 'black' : 'white'}
+      width="24"
+      viewBox="0 0 18 18"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>Close</title>
+      <path d="M9.00023 7.58599L13.9502 2.63599L15.3642 4.04999L10.4142 8.99999L15.3642 13.95L13.9502 15.364L9.00023 10.414L4.05023 15.364L2.63623 13.95L7.58623 8.99999L2.63623 4.04999L4.05023 2.63599L9.00023 7.58599Z" />
+    </svg>
+  );
+};
+
+const MenuIcon = ({ colorMode }) => (
+  <svg
+    fill={colorMode === 'light' ? 'black' : 'white'}
+    width="24px"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <title>Menu</title>
+    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+  </svg>
+);
+
+const MenuToggle = ({ toggle, isOpen }) => {
+  const { colorMode } = useColorMode();
+
+  return (
+    <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
+      {isOpen ? (
+        <CloseIcon colorMode={colorMode} />
+      ) : (
+        <MenuIcon colorMode={colorMode} />
+      )}
+    </Box>
+  );
+};
+
+const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
+  return (
+    <Link href={to}>
+      <Text display="block" {...rest}>
+        {children}
+      </Text>
+    </Link>
+  );
+};
+
+const MenuLinks = ({ isOpen }) => {
+  return (
+    <Box
+      display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
+      flexBasis={{ base: '100%', md: 'auto' }}
+    >
+      <Stack
+        spacing={8}
+        align="center"
+        justify={['center', 'space-between', 'flex-end', 'flex-end']}
+        direction={['column', 'row', 'row', 'row']}
+        pt={[4, 4, 0, 0]}
+      >
+        {menu.map((edge) => (
+          <MenuItem to={edge.link} key={edge.key} isLast={edge.isLast}>
+            {edge.name}
+          </MenuItem>
+        ))}
+        <Button size="sm" rounded="md" bg={['transparent']} border="1px">
+          Subscribe
+        </Button>
+        <ThemeSwitch />
+      </Stack>
+    </Box>
+  );
+};
+
+const NavBarContainer = ({ children, ...props }) => {
+  return (
+    <Flex
+      as="nav"
+      align="center"
+      justify="space-between"
+      wrap="wrap"
+      w="100%"
+      mb={8}
+      p={8}
+      bg={['primary.500', 'primary.500', 'transparent', 'transparent']}
+      {...props}
+    >
+      {children}
+    </Flex>
+  );
+};
+
+export default NavBar;

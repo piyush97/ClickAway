@@ -4,7 +4,7 @@ import Hero from '../../component/hero';
 
 const HeroContainer = () => {
   return (
-    <div>
+    <>
       <Header />
       <Hero
         title={
@@ -17,7 +17,7 @@ const HeroContainer = () => {
         ctaText="Subscribe"
         ctaLink="/signup"
       />
-    </div>
+    </>
   );
 };
 
