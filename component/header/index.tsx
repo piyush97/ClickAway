@@ -15,14 +15,12 @@ const Header = (props) => {
 
   return (
     <>
-      <div style={{ backgroundColor: '#38B2AC', height: '0.4rem' }} />
       <Flex
         as="nav"
         align="center"
         justify="space-between"
         wrap="wrap"
         py={'1rem'}
-        px={['0', '1rem', '20rem', '15rem']}
         {...props}
       >
         <Flex align="center" mr={5}>
@@ -67,7 +65,7 @@ const Header = (props) => {
           mt={{ base: 4, md: 0 }}
         >
           <Button bg="transparent" border="1px">
-            Create account
+            Subscribe
           </Button>
         </Box>
       </Flex>

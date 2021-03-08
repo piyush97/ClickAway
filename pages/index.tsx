@@ -1,10 +1,6 @@
 import React from 'react';
-import Header from '../component/header';
+import Home from './home';
 
-export default function Home() {
-  return (
-    <>
-      <Header />
-    </>
-  );
+export default function Index() {
+  return <Home />;
 }
