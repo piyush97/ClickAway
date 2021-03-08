@@ -9,9 +9,9 @@ export default function Home() {
       <NextSeo
         title="Click Away"
         description="Deals Just a click away"
-        canonical="https://www.canonical.ie/"
+        canonical="https://www.piyushmehta.com/"
         openGraph={{
-          url: 'http://click-away.piyushmehta.com/',
+          url: 'https://click-away.piyushmehta.com/',
           title: 'Click Away',
           description: 'Deals Just a click away',
           images: [
