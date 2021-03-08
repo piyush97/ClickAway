@@ -8,7 +8,7 @@ export interface ChakraConfig {
 
 const config: ChakraConfig = {
   initialColorMode: 'dark',
-  useSystemColorMode: false,
+  useSystemColorMode: true,
 };
 // 3. extend the theme
 const theme = extendTheme({ config });
