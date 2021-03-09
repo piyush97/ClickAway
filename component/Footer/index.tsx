@@ -7,7 +7,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import Image from 'next/Image';
+import Image from 'next/image';
 import * as React from 'react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
@@ -27,7 +27,7 @@ export const Footer = () => {
           href="/"
           rel="home"
         >
-          <Image height="40" width="40" src="/logo.png" />
+          <Image src="/logo.png" alt="logo" width="40px" height="40px" />{' '}
         </a>
         <Stack
           my={{ base: '6', md: 0 }}
