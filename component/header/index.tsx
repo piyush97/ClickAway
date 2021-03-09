@@ -72,7 +72,7 @@ const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
-const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
+const MenuItem = ({ children, to = '/', ...rest }) => {
   return (
     <Link href={to}>
       <Text display="block" {...rest}>

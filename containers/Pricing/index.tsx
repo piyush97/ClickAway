@@ -44,6 +44,7 @@ export const PricingContainer: React.FC = () => {
               name: edge.plan,
               features: edge.features,
             }}
+            key={edge.key}
             isPopular={edge.isPopular}
             icon={edge.icon}
             button={

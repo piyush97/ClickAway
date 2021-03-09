@@ -9,14 +9,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-export default function Hero({
-  title,
-  subtitle,
-  image,
-  ctaLink,
-  ctaText,
-  ...rest
-}) {
+export default function Hero({ title, subtitle, image, ctaText, ...rest }) {
   return (
     <Flex
       align="center"
