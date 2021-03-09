@@ -119,7 +119,9 @@ const NavBarContainer = ({ children, ...props }) => {
       w="100%"
       mb={8}
       p={8}
-      bg={['primary.500', 'primary.500', 'transparent', 'transparent']}
+      boxShadow="sm"
+      rounded="md"
+      bg={['transparent']}
       {...props}
     >
       {children}
