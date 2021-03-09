@@ -24,16 +24,14 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
-    'prettier/@typescript-eslint',
-    'simple-import-sort',
     'plugin:prettier/recommended', // Make sure this is always the last element in the array.
   ],
   rules: {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'simple-import-sort/sort': 'error',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
